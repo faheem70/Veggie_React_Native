@@ -27,7 +27,7 @@ const ProfileScreen = () => {
       },
       headerLeft: () => (
         <Image
-          style={{ width: 140, height: 120, resizeMode: "contain" }}
+          style={{ width: 140, height: 70, resizeMode: "contain" }}
           source={{
             uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
           }}
@@ -99,14 +99,14 @@ const ProfileScreen = () => {
   };
   const handleNavigateToNewProduct = () => {
     if (user.email === "faheemakhtar19730@gmail.com") {
-      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+
       navigation.navigate("NewProduct");
     }
   };
 
   const handleNavigateToUpdateProduct = () => {
     if (user.email === "faheemakhtar19730@gmail.com") {
-      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+
       navigation.navigate("Update");
     }
 
@@ -128,8 +128,13 @@ const ProfileScreen = () => {
   return (
     <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-        Welcome {user?.name}
+        Welcome {user?.name} To ARF Bazaar
       </Text>
+
+      <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+        Email : {user?.email}
+      </Text>
+
 
       <View
         style={{
@@ -190,6 +195,19 @@ const ProfileScreen = () => {
           </Pressable>
 
         )}
+
+
+
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 10,
+          marginTop: 12,
+        }}
+      >
         {user?.email === "faheemakhtar19730@gmail.com" && (
           <Pressable
             style={{
@@ -204,7 +222,6 @@ const ProfileScreen = () => {
           </Pressable>
 
         )}
-
         {user?.email === "faheemakhtar19730@gmail.com" && (
           <Pressable
             style={{
@@ -219,27 +236,6 @@ const ProfileScreen = () => {
           </Pressable>
 
         )}
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 12,
-        }}
-      >
-        <Pressable
-          style={{
-            padding: 10,
-            backgroundColor: "#E0E0E0",
-            borderRadius: 25,
-            flex: 1,
-          }}
-        >
-          <Text style={{ textAlign: "center" }}>Buy Again</Text>
-        </Pressable>
-
         <Pressable
           onPress={logout}
           style={{

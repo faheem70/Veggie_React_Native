@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import Axios from 'axios';
+import axios from 'axios';
 
 const UpdateProductScreen = ({ route, navigation }) => {
     const { productId } = route.params;
@@ -13,7 +13,7 @@ const UpdateProductScreen = ({ route, navigation }) => {
     const [quantity, setQuantity] = useState('');
 
     const updateProduct = () => {
-        Axios.put(`https://arf-veg.onrender.com/products/${productId}`, {
+        axios.put(`https://arf-veg.onrender.com/products/${productId}`, {
             name,
             category,
             image,
@@ -22,7 +22,7 @@ const UpdateProductScreen = ({ route, navigation }) => {
         })
             .then((response) => {
                 // Handle success (e.g., show a success message, navigate back to the product list screen)
-                navigation.goBack();
+                console.log(response);
             })
             .catch((error) => {
                 // Handle error (e.g., show an error message)

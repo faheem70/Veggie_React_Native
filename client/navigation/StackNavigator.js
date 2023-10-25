@@ -21,6 +21,7 @@ import UpdateProductScreen from "../screens/UpdateProductScreen";
 import DeleteProductScreen from "../screens/DeleteProductScreen";
 import PhoneSignIn from "../screens/PhoneSignIn";
 import GetOrderDetails from "../screens/GetOrderDetails";
+import ProductsByCategoryScreen from "../screens/ProductByCategoryScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -33,11 +34,11 @@ const StackNavigator = () => {
           component={HomeScreen}
           options={{
             tabBarLabel: "Home",
-            tabBarLabelStyle: { color: "#008E97" },
+            tabBarLabelStyle: { color: "#00975b" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="#008E97" />
+                <Entypo name="home" size={24} color="##00975b" />
               ) : (
                 <AntDesign name="home" size={24} color="black" />
               ),
@@ -49,10 +50,10 @@ const StackNavigator = () => {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
-            tabBarLabelStyle: { color: "#008E97" },
+            tabBarLabelStyle: { color: "##00975b" },
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Ionicons name="person" size={24} color="#008E97" />
+                <Ionicons name="person" size={24} color="#00975b" />
               ) : (
                 <Ionicons name="person-outline" size={24} color="black" />
               ),
@@ -64,11 +65,11 @@ const StackNavigator = () => {
           component={CartScreen}
           options={{
             tabBarLabel: "Cart",
-            tabBarLabelStyle: { color: "#008E97" },
+            tabBarLabelStyle: { color: "#00975b" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <AntDesign name="shoppingcart" size={24} color="#008E97" />
+                <AntDesign name="shoppingcart" size={24} color="#00975b" />
               ) : (
                 <AntDesign name="shoppingcart" size={24} color="black" />
               ),
@@ -147,6 +148,12 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Detail"
           component={GetOrderDetails}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ProductsByCategory"
+          component={ProductsByCategoryScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

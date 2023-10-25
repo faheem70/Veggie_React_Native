@@ -356,3 +356,15 @@ app.delete("/products/:id", async (req, res) => {
     res.status(500).json({ error: "An error occurred while deleting the product" });
   }
 });
+
+app.get("/products/category/:category", async (req, res) => {
+  const requestedCategory = req.params.category;
+
+  try {
+    const products = await Product.find({ category: requestedCategory });
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while fetching products" });
+  }
+});

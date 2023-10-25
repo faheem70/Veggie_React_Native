@@ -32,25 +32,25 @@ const HomeScreen = () => {
     {
       id: "0",
       image: "https://spendsmart.extension.iastate.edu/wp-content/uploads/2014/06/vegetables-variety.jpg",
-      name: "Fresh Vegetables",
+      name: "vegetables",
     },
     {
       id: "1",
       image:
         "https://previews.123rf.com/images/photomaru/photomaru1510/photomaru151000012/46658347-pile-of-various-fresh-fruits-over-white-background.jpg",
-      name: "Fresh Fruits",
+      name: "fruits",
     },
     {
       id: "3",
       image:
         "https://www.bigbasket.com/media/uploads/p/xxl/10000539_4-bb-royal-mixed-dry-fruits.jpg",
-      name: "Dry Friuts",
+      name: "dry friuts",
     },
     {
       id: "4",
       image:
         "https://5.imimg.com/data5/SELLER/Default/2021/3/KO/QG/XG/3922575/all-grocery-items-500x500.jpg",
-      name: "Grocery",
+      name: "grocery",
     },
     {
       id: "5",
@@ -132,7 +132,7 @@ const HomeScreen = () => {
   ];
   const offers = [
     {
-      id: "11",
+      id: "0",
       title:
         "Safal Peas",
       offer: "72% off",
@@ -146,11 +146,10 @@ const HomeScreen = () => {
         "https://www.bigbasket.com/media/uploads/p/l/40006613-3_2-safal-frozen-green-peas.jpg?tr=w-640,q=80",
 
       ],
-      color: "Green",
-      size: "Normal",
+
     },
     {
-      id: "12",
+      id: "1",
       title:
         "Almonds",
       offer: "40%",
@@ -162,22 +161,20 @@ const HomeScreen = () => {
         "https://nuttyyogi.com/cdn/shop/products/Almonds.jpg?v=1606373738",
         "https://5.imimg.com/data5/SELLER/Default/2023/1/ZN/KZ/GM/31056044/raw-fresh-almonds.jpg",
       ],
-      color: "black",
-      size: "Normal",
+
     },
     {
-      id: "13",
+      id: "2",
       title: "Kiwi",
       offer: "40%",
       oldPrice: 160,
       price: 140.65,
       image: "https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg",
       carouselImages: ["https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg"],
-      color: "black",
-      size: "Normal",
+
     },
     {
-      id: "14",
+      id: "3",
       title:
         "Arhar Daal",
       offer: "40%",
@@ -189,8 +186,7 @@ const HomeScreen = () => {
         "https://m.media-amazon.com/images/I/81jiJ7DTGGL._AC_UF1000,1000_QL80_.jpg",
         "https://www.ritirivaaj.com/cdn/shop/products/Unpolished-Toor-Arhar-Dal-Riti-Rivaaj-Grocery.jpg?v=1624796314",
       ],
-      color: "Norway Blue",
-      size: "8GB RAM, 128GB Storage",
+
     },
   ];
   const [products, setProducts] = useState([]);
@@ -200,8 +196,8 @@ const HomeScreen = () => {
   const [category, setCategory] = useState("fruits");
   const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  // const [location, setLocation] = useState(null);
+  // const [errorMsg, setErrorMsg] = useState(null);
   console.log(selectedAddress)
   const [items, setItems] = useState([
     { label: "Fruits", value: "fruits" },
@@ -258,23 +254,10 @@ const HomeScreen = () => {
   const onCategoryChange = (selectedCategory) => {
     setCategory(selectedCategory);
   };
-  const getCurrentLocation = async () => {
-    try {
-      const { status } = await Permissions.askAsync(Permissions.LOCATION);
 
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-
-      const userLocation = await Location.getCurrentPositionAsync({});
-      setLocation(userLocation);
-    } catch (error) {
-      console.error('Error while fetching location:', error);
-      setErrorMsg('Error while fetching location');
-    }
+  const navigateToCategory = (categoryName) => {
+    navigation.navigate("ProductsByCategory", { categoryName });
   };
-
   return (
     <>
       <SafeAreaView
@@ -348,6 +331,7 @@ const HomeScreen = () => {
             {list.map((item, index) => (
               <Pressable
                 key={index}
+                onPress={() => navigateToCategory(item.name)}
                 style={{
                   margin: 10,
                   justifyContent: "center",
@@ -375,15 +359,15 @@ const HomeScreen = () => {
 
           <SliderBox
             images={images}
-            autoPlay
+            autoplay={true}  // Set to true for autoplay
             circleLoop
             dotColor={"#13274F"}
             inactiveDotColor="#90A4AE"
-            ImageComponentStyle={{ width: "100%" }}
+            ImageComponentStyle={{ width: "100%", height: 200 }}
           />
 
           <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
-            Trending Deals of the week
+            Deals of the Day
           </Text>
 
           <View
@@ -659,13 +643,13 @@ const HomeScreen = () => {
               style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
             >
               <Ionicons name="locate-sharp" size={22} color="#0066b2" />
-              <Pressable onPress={getCurrentLocation}>
+
 
 
                 <Text style={{ color: "#0066b2", fontWeight: "400" }}>
                   Use My Currect location
                 </Text>
-              </Pressable>
+
             </View>
           </View>
         </ModalContent>
