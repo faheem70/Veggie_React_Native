@@ -7,7 +7,7 @@ function GetOrderDetails({ userId }) {
 
     useEffect(() => {
         axios
-            .get(`http://10.0.2.2:8000/orders/${userId}`)
+            .get(`https://arf-veg.onrender.com/orders/${userId}`)
             .then((response) => {
                 setOrders(response.data);
             })

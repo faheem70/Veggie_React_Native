@@ -32,7 +32,7 @@ const RegisterScreen = () => {
     // send a POST request to the backend API to register the user
     axios({
       method: 'post',
-      url: 'http://10.0.2.2:8000/register', // Replace with your backend API URL
+      url: 'https://arf-veg.onrender.com/register', // Replace with your backend API URL
       data: user,
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const RegisterScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', marginTop: 50 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', marginTop: 40 }}>
       <View>
         <Image
           style={{ width: 150, height: 100 }}

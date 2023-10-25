@@ -39,7 +39,7 @@ const ProductInfoScreen = () => {
     // Fetch user addresses here from your API
     const fetchUserAddresses = async () => {
       try {
-        const response = await fetch(`http://10.0.2.2:8000/addresses/${userId}`); // Replace with your API URL
+        const response = await fetch(`https://arf-veg.onrender.com/addresses/${userId}`); // Replace with your API URL
         const data = await response.json();
         setUserAddresses(data.addresses); // Assuming data.addresses contains an array of user addresses
       } catch (error) {

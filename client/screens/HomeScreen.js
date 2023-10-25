@@ -212,7 +212,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://10.0.2.2:8000/products");
+        const response = await axios.get("https://arf-veg.onrender.com/products");
         setProducts(response.data);
       } catch (error) {
         console.log("error message", error);
@@ -235,7 +235,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:8000/addresses/${userId}`
+        `https://arf-veg.onrender.com/addresses/${userId}`
       );
       const { addresses } = response.data;
 

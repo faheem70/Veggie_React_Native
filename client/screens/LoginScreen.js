@@ -41,7 +41,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post("http://10.0.2.2:8000/login", user, {
+      .post("https://arf-veg.onrender.com/login", user, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -63,7 +63,7 @@ const LoginScreen = () => {
   }
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop: 50 }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop: 40 }}
     >
       <View>
         <Image

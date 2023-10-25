@@ -20,7 +20,7 @@ const NewProduct = () => {
         };
 
         // Send a POST request to add the new product to your backend
-        axios.post('http://10.0.2.2:8000/products', newProduct)
+        axios.post('https://arf-veg.onrender.com/products', newProduct)
             .then((response) => {
                 // Handle success, e.g., show a success message or navigate to a different screen
                 console.log('Product added:', response.data);

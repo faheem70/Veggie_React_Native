@@ -54,7 +54,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://10.0.2.2:8000/profile/${userId}`
+          `https://arf-veg.onrender.com/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -77,7 +77,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://10.0.2.2:8000/orders/${userId}`
+          `https://arf-veg.onrender.com/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);

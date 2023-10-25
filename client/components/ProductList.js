@@ -7,7 +7,7 @@ const ProductList = () => {
 
     useEffect(() => {
         // Fetch products from your backend API
-        axios.get('http://10.0.2.2:8000/products')
+        axios.get('https://arf-veg.onrender.com/products')
             .then((response) => {
                 setProducts(response.data);
             })

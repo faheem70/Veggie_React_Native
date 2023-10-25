@@ -34,6 +34,12 @@ function PhoneSignIn() {
     if (!confirm) {
         return (
             <View style={styles.container}>
+                <Image
+                    style={{ width: 140, height: 100 }}
+                    source={{
+                        uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
+                    }}
+                />
                 <Button
                     title="Phone Number Sign In"
                     onPress={() => signInWithPhoneNumber('+1 650-555-3434')}
@@ -43,7 +49,14 @@ function PhoneSignIn() {
     }
 
     return (
+
         <View style={styles.container}>
+            <Image
+                style={{ width: 140, height: 100 }}
+                source={{
+                    uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
+                }}
+            />
             <TextInput
                 style={styles.input}
                 value={code}

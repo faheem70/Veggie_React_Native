@@ -9,7 +9,7 @@ const DeleteProductScreen = ({ navigation }) => {
 
     useEffect(() => {
         // Fetch the list of products from your API
-        Axios.get('http://10.0.2.2:8000/products')
+        Axios.get('https://arf-veg.onrender.com/products')
             .then((response) => {
                 setProducts(response.data);
             })
@@ -19,7 +19,7 @@ const DeleteProductScreen = ({ navigation }) => {
     }, []);
 
     const deleteProduct = (productId) => {
-        Axios.delete(`http://10.0.2.2:8000/products/${productId}`)
+        Axios.delete(`https://arf-veg.onrender.com/products/${productId}`)
             .then((response) => {
                 // Handle success (e.g., update the product list after deletion)
                 setProducts(products.filter((product) => product._id !== productId));
