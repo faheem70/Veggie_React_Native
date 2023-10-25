@@ -25,7 +25,7 @@ const AddAddressScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/addresses/${userId}`
+        `http://10.0.2.2:8000/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -40,6 +40,28 @@ const AddAddressScreen = () => {
       fetchAddresses();
     }, [])
   );
+
+  const editAddress = (addressId) => {
+    // Implement the logic to navigate to the edit address screen and pass the address ID
+    navigation.navigate("Add", { addressId });
+  }
+
+
+  const removeAddress = (addressId) => {
+    // Implement the logic to remove the address (e.g., send a DELETE request to the server)
+    axios
+      .delete(`http://10.0.2.2:8000/addresses/${addressId}`)
+      .then(() => {
+        // Remove the address from the state (addresses) and update the UI
+        setAddresses(addresses.filter((item) => item.id !== addressId));
+      })
+      .catch((error) => {
+        console.log("Error while removing address: ", error);
+      });
+  };
+
+
+
   console.log("addresses", addresses);
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 50 }}>
@@ -128,7 +150,7 @@ const AddAddressScreen = () => {
               </Text>
 
               <Text style={{ fontSize: 15, color: "#181818" }}>
-                India, Bangalore
+                India,Uttar Pradesh
               </Text>
 
               <Text style={{ fontSize: 15, color: "#181818" }}>
@@ -155,6 +177,7 @@ const AddAddressScreen = () => {
                     borderWidth: 0.9,
                     borderColor: "#D0D0D0",
                   }}
+                  onPress={() => editAddress(item.id)}
                 >
                   <Text>Edit</Text>
                 </Pressable>
@@ -168,6 +191,7 @@ const AddAddressScreen = () => {
                     borderWidth: 0.9,
                     borderColor: "#D0D0D0",
                   }}
+                  onPress={() => removeAddress(item.id)}
                 >
                   <Text>Remove</Text>
                 </Pressable>

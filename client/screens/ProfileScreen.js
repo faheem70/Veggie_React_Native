@@ -17,6 +17,7 @@ const ProfileScreen = () => {
   const { userId, setUserId } = useContext(UserType);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showOrders, setShowOrders] = useState(false);
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,7 +29,7 @@ const ProfileScreen = () => {
         <Image
           style={{ width: 140, height: 120, resizeMode: "contain" }}
           source={{
-            uri: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
+            uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
           }}
         />
       ),
@@ -53,7 +54,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/profile/${userId}`
+          `http://10.0.2.2:8000/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -76,7 +77,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/orders/${userId}`
+          `http://10.0.2.2:8000/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);
@@ -89,7 +90,41 @@ const ProfileScreen = () => {
 
     fetchOrders();
   }, []);
-  console.log("orders", orders);
+  const handleShowOrders = () => {
+    setShowOrders(true); // When "Your orders" is pressed, set showOrders to true
+  };
+
+  const handleNavigateToProfile = () => {
+    navigation.navigate("Profile"); // Replace "Profile" with the name of your "Profile" screen
+  };
+  const handleNavigateToNewProduct = () => {
+    if (user.email === "faheemakhtar19730@gmail.com") {
+      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+      navigation.navigate("NewProduct");
+    }
+  };
+
+  const handleNavigateToUpdateProduct = () => {
+    if (user.email === "faheemakhtar19730@gmail.com") {
+      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+      navigation.navigate("Update");
+    }
+
+  }
+  const handleNavigateToDeleteProduct = () => {
+    if (user.email === "faheemakhtar19730@gmail.com") {
+      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+      navigation.navigate("Delete");
+    }
+  }
+
+  const handleNavigateToOrderDetails = () => {
+    if (user.email === "faheemakhtar19730@gmail.com") {
+      // Navigate to the "NewProduct" screen (replace with the actual screen name)
+      navigation.navigate("Detail");
+    }
+  }
+  // console.log("orders", orders);
   return (
     <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
@@ -111,6 +146,7 @@ const ProfileScreen = () => {
             borderRadius: 25,
             flex: 1,
           }}
+          onPress={handleShowOrders}
         >
           <Text style={{ textAlign: "center" }}>Your orders</Text>
         </Pressable>
@@ -122,9 +158,67 @@ const ProfileScreen = () => {
             borderRadius: 25,
             flex: 1,
           }}
+          onPress={handleNavigateToProfile}
         >
           <Text style={{ textAlign: "center" }}>Your Account</Text>
         </Pressable>
+        {user?.email === "faheemakhtar19730@gmail.com" && (
+          <Pressable
+            style={{
+              padding: 10,
+              backgroundColor: "#E0E0E0",
+              borderRadius: 25,
+              flex: 1,
+            }}
+            onPress={handleNavigateToNewProduct}
+          >
+            <Text style={{ textAlign: "center" }}>New Product</Text>
+          </Pressable>
+
+        )}
+        {user?.email === "faheemakhtar19730@gmail.com" && (
+          <Pressable
+            style={{
+              padding: 10,
+              backgroundColor: "#E0E0E0",
+              borderRadius: 25,
+              flex: 1,
+            }}
+            onPress={handleNavigateToUpdateProduct}
+          >
+            <Text style={{ textAlign: "center" }}>UpdateProduct</Text>
+          </Pressable>
+
+        )}
+        {user?.email === "faheemakhtar19730@gmail.com" && (
+          <Pressable
+            style={{
+              padding: 10,
+              backgroundColor: "#E0E0E0",
+              borderRadius: 25,
+              flex: 1,
+            }}
+            onPress={handleNavigateToDeleteProduct}
+          >
+            <Text style={{ textAlign: "center" }}>DeleteProduct</Text>
+          </Pressable>
+
+        )}
+
+        {user?.email === "faheemakhtar19730@gmail.com" && (
+          <Pressable
+            style={{
+              padding: 10,
+              backgroundColor: "#E0E0E0",
+              borderRadius: 25,
+              flex: 1,
+            }}
+            onPress={handleNavigateToOrderDetails}
+          >
+            <Text style={{ textAlign: "center" }}>OrderDetails</Text>
+          </Pressable>
+
+        )}
       </View>
 
       <View
@@ -159,39 +253,33 @@ const ProfileScreen = () => {
         </Pressable>
       </View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : orders.length > 0 ? (
-          orders.map((order) => (
-            <Pressable
-              style={{
-                marginTop: 20,
-                padding: 15,
-                borderRadius: 8,
-                borderWidth: 1,
-                borderColor: "#d0d0d0",
-                marginHorizontal: 10,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              key={order._id}
-            >
-              {/* Render the order information here */}
-              {order.products.slice(0, 1)?.map((product) => (
-                <View style={{ marginVertical: 10 }} key={product._id}>
-                  <Image
-                    source={{ uri: product.image }}
-                    style={{ width: 100, height: 100, resizeMode: "contain" }}
-                  />
-                </View>
-              ))}
-            </Pressable>
-          ))
-        ) : (
-          <Text>No orders found</Text>
-        )}
-      </ScrollView>
+      {showOrders && (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {loading ? (
+            <Text>Loading...</Text>
+          ) : orders.length > 0 ? (
+            orders.map((order) => (
+              <Pressable
+                style={{
+                  // ... (your order container styles)
+                }}
+                key={order._id}
+              >
+                {order.products.slice(0, 1)?.map((product) => (
+                  <View style={{ marginVertical: 10 }} key={product._id}>
+                    <Image
+                      source={{ uri: product.image }}
+                      style={{ width: 100, height: 100, resizeMode: "contain" }}
+                    />
+                  </View>
+                ))}
+              </Pressable>
+            ))
+          ) : (
+            <Text>No orders found</Text>
+          )}
+        </ScrollView>
+      )}
     </ScrollView>
   );
 };

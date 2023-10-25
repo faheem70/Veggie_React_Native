@@ -41,7 +41,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post("http://localhost:8000/login", user, {
+      .post("http://10.0.2.2:8000/login", user, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -58,6 +58,9 @@ const LoginScreen = () => {
         console.log(error);
       });
   };
+  const handleSignInWithPhone = () => {
+    navigation.navigate("Phone")
+  }
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop: 50 }}
@@ -66,7 +69,7 @@ const LoginScreen = () => {
         <Image
           style={{ width: 140, height: 100 }}
           source={{
-            uri: "https://w7.pngwing.com/pngs/600/399/png-transparent-arf-festival-comics-bgeek-exhibition-star-festival-comics-text-logo-thumbnail.png",
+            uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
           }}
         />
       </View>
@@ -189,6 +192,29 @@ const LoginScreen = () => {
             }}
           >
             Login
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={handleSignInWithPhone}
+          style={{
+            marginTop: 10, // Add some margin to separate the buttons
+            width: 200,
+            backgroundColor: "#FEBE10",
+            borderRadius: 6,
+            marginLeft: "auto",
+            marginRight: "auto",
+            padding: 15,
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            Sign in with Phone
           </Text>
         </Pressable>
 

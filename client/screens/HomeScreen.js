@@ -25,172 +25,169 @@ import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserType } from "../UserContext";
 import jwt_decode from "jwt-decode";
+import { Location, Permisson } from "expo";
 
 const HomeScreen = () => {
   const list = [
     {
       id: "0",
-      image: "https://m.media-amazon.com/images/I/41EcYoIZhIL._AC_SY400_.jpg",
-      name: "Home",
+      image: "https://spendsmart.extension.iastate.edu/wp-content/uploads/2014/06/vegetables-variety.jpg",
+      name: "Fresh Vegetables",
     },
     {
       id: "1",
       image:
-        "https://m.media-amazon.com/images/G/31/img20/Events/Jup21dealsgrid/blockbuster.jpg",
-      name: "Deals",
+        "https://previews.123rf.com/images/photomaru/photomaru1510/photomaru151000012/46658347-pile-of-various-fresh-fruits-over-white-background.jpg",
+      name: "Fresh Fruits",
     },
     {
       id: "3",
       image:
-        "https://images-eu.ssl-images-amazon.com/images/I/31dXEvtxidL._AC_SX368_.jpg",
-      name: "Electronics",
+        "https://www.bigbasket.com/media/uploads/p/xxl/10000539_4-bb-royal-mixed-dry-fruits.jpg",
+      name: "Dry Friuts",
     },
     {
       id: "4",
       image:
-        "https://m.media-amazon.com/images/G/31/img20/Events/Jup21dealsgrid/All_Icons_Template_1_icons_01.jpg",
-      name: "Mobiles",
+        "https://5.imimg.com/data5/SELLER/Default/2021/3/KO/QG/XG/3922575/all-grocery-items-500x500.jpg",
+      name: "Grocery",
     },
     {
       id: "5",
       image:
-        "https://m.media-amazon.com/images/G/31/img20/Events/Jup21dealsgrid/music.jpg",
-      name: "Music",
+        "https://chaldn.com/_mpimage/cereals?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D71049&q=best&v=1&m=400",
+      name: "Breakfast",
     },
-    {
-      id: "6",
-      image: "https://m.media-amazon.com/images/I/51dZ19miAbL._AC_SY350_.jpg",
-      name: "Fashion",
-    },
+
   ];
   const images = [
-    "https://img.etimg.com/thumb/msid-93051525,width-1070,height-580,imgsize-2243475,overlay-economictimes/photo.jpg",
-    "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/devjyoti/PD23/Launches/Updated_ingress1242x550_3.gif",
-    "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Books/BB/JULY/1242x550_Header-BB-Jul23.jpg",
+    "https://delmonte-sitefinity-public.s3.amazonaws.com/images/default-source/hompage-carousel-backgrounds/honeyglow_sweetest-side-of-life_banner_1300-x-50043818711ae484dc2a2764ddd48534898.jpg?sfvrsn=bc84c443_2",
+    "https://ghoshak-website-builder.s3.amazonaws.com/78b31aa1-b72f-437a-ad0e-778bf352cb4c.jpeg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvSLKZL9XDCFnp5woV81lSKFywclo5gRwBZI-eTQlD-l9Hs--1EFhOeTZShmDDfc3alM&usqp=CAU",
   ];
   const deals = [
     {
       id: "20",
-      title: "OnePlus Nord CE 3 Lite 5G (Pastel Lime, 8GB RAM, 128GB Storage)",
-      oldPrice: 25000,
-      price: 19000,
+      title: "Apple",
+      oldPrice: 150,
+      price: 100,
       image:
-        "https://images-eu.ssl-images-amazon.com/images/G/31/wireless_products/ssserene/weblab_wf/xcm_banners_2022_in_bau_wireless_dec_580x800_once3l_v2_580x800_in-en.jpg",
+        "https://i.pinimg.com/736x/39/01/2c/39012c0f20bc5d4a7a55e6903d129a12.jpg",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/61QRgOgBx0L._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61uaJPLIdML._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/510YZx4v3wL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61J6s1tkwpL._SX679_.jpg",
+        "https://i.pinimg.com/736x/39/01/2c/39012c0f20bc5d4a7a55e6903d129a12.jpg",
+        "https://freshindiaorganics.com/cdn/shop/products/Apples.jpg?v=1686739530",
+        "https://5.imimg.com/data5/AK/RA/MY-68428614/apple.jpg",
+
       ],
-      color: "Stellar Green",
-      size: "6 GB RAM 128GB Storage",
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
     {
       id: "30",
       title:
-        "Samsung Galaxy S20 FE 5G (Cloud Navy, 8GB RAM, 128GB Storage) with No Cost EMI & Additional Exchange Offers",
-      oldPrice: 74000,
-      price: 26000,
+        "Pomegrante",
+      oldPrice: 150,
+      price: 120,
       image:
-        "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/Samsung/SamsungBAU/S20FE/GW/June23/BAU-27thJune/xcm_banners_2022_in_bau_wireless_dec_s20fe-rv51_580x800_in-en.jpg",
+        "https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_725163_16631634171257083.png",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/81vDZyJQ-4L._SY879_.jpg",
-        "https://m.media-amazon.com/images/I/61vN1isnThL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71yzyH-ohgL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61vN1isnThL._SX679_.jpg",
+        "https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_725163_16631634171257083.png",
+        "https://i0.wp.com/post.healthline.com/wp-content/uploads/2022/02/pomegranate-seeds-fruit-1296x728-header.jpg?w=1155&h=1528",
+        "https://images.healthshots.com/healthshots/en/uploads/2021/09/27184641/pomegranate-1600x900.jpg",
+
       ],
-      color: "Cloud Navy",
-      size: "8 GB RAM 128GB Storage",
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
     {
       id: "40",
       title:
-        "Samsung Galaxy M14 5G (ICY Silver, 4GB, 128GB Storage) | 50MP Triple Cam | 6000 mAh Battery | 5nm Octa-Core Processor | Android 13 | Without Charger",
-      oldPrice: 16000,
-      price: 14000,
+        "Mushroom",
+      oldPrice: 150,
+      price: 80,
       image:
-        "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/Samsung/CatPage/Tiles/June/xcm_banners_m14_5g_rv1_580x800_in-en.jpg",
+        "https://m.media-amazon.com/images/I/71XMKwfQCzL.jpg",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/817WWpaFo1L._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/81KkF-GngHL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61IrdBaOhbL._SX679_.jpg",
+        "https://www.reliablebasket.in/uploads/product_image/1608855553.jpeg",
+        "https://cdn-prod.medicalnewstoday.com/content/images/articles/278/278858/mushrooms-in-a-bowel-on-a-dark-table.jpg",
+        "https://m.media-amazon.com/images/I/71XMKwfQCzL.jpg",
       ],
-      color: "Icy Silver",
-      size: "6 GB RAM 64GB Storage",
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
     {
       id: "40",
       title:
-        "realme narzo N55 (Prime Blue, 4GB+64GB) 33W Segment Fastest Charging | Super High-res 64MP Primary AI Camera",
+        "Aashirvad",
       oldPrice: 12999,
       price: 10999,
       image:
-        "https://images-eu.ssl-images-amazon.com/images/G/31/tiyesum/N55/June/xcm_banners_2022_in_bau_wireless_dec_580x800_v1-n55-marchv2-mayv3-v4_580x800_in-en.jpg",
+        "https://5.imimg.com/data5/DS/WE/GLADMIN-17396827/aashirvaad-atta-5-kg.png",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/41Iyj5moShL._SX300_SY300_QL70_FMwebp_.jpg",
-        "https://m.media-amazon.com/images/I/61og60CnGlL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61twx1OjYdL._SX679_.jpg",
+        "https://5.imimg.com/data5/SELLER/Default/2022/3/PD/KP/WB/148540348/aashirvaad-atta-5kg.jpg",
+        "https://i.ytimg.com/vi/y_vzst8GFhk/maxresdefault.jpg",
+
       ],
     },
   ];
   const offers = [
     {
-      id: "0",
+      id: "11",
       title:
-        "Oppo Enco Air3 Pro True Wireless in Ear Earbuds with Industry First Composite Bamboo Fiber, 49dB ANC, 30H Playtime, 47ms Ultra Low Latency,Fast Charge,BT 5.3 (Green)",
+        "Safal Peas",
       offer: "72% off",
-      oldPrice: 7500,
-      price: 4500,
+      oldPrice: 100,
+      price: 80,
       image:
-        "https://m.media-amazon.com/images/I/61a2y1FCAJL._AC_UL640_FMwebp_QL65_.jpg",
+        "https://www.bigbasket.com/media/uploads/p/l/40006613_1-safal-frozen-green-peas.jpg?tr=w-640,q=80",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/61a2y1FCAJL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71DOcYgHWFL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71LhLZGHrlL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/61Rgefy4ndL._SX679_.jpg",
+        "https://www.bigbasket.com/media/uploads/p/l/40006613_1-safal-frozen-green-peas.jpg?tr=w-640,q=80",
+        "https://www.bigbasket.com/media/uploads/p/l/40006613-2_2-safal-frozen-green-peas.jpg?tr=w-640,q=80",
+        "https://www.bigbasket.com/media/uploads/p/l/40006613-3_2-safal-frozen-green-peas.jpg?tr=w-640,q=80",
+
       ],
       color: "Green",
       size: "Normal",
     },
     {
-      id: "1",
+      id: "12",
       title:
-        "Fastrack Limitless FS1 Pro Smart Watch|1.96 Super AMOLED Arched Display with 410x502 Pixel Resolution|SingleSync BT Calling|NitroFast Charging|110+ Sports Modes|200+ Watchfaces|Upto 7 Days Battery",
+        "Almonds",
       offer: "40%",
-      oldPrice: 7955,
-      price: 3495,
-      image: "https://m.media-amazon.com/images/I/41mQKmbkVWL._AC_SY400_.jpg",
+      oldPrice: 210,
+      price: 180,
+      image: "https://m.media-amazon.com/images/I/71Qpb6-l+fL._AC_UF1000,1000_QL80_.jpg",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/71h2K2OQSIL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71BlkyWYupL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71c1tSIZxhL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/71Qpb6-l+fL._AC_UF1000,1000_QL80_.jpg",
+        "https://nuttyyogi.com/cdn/shop/products/Almonds.jpg?v=1606373738",
+        "https://5.imimg.com/data5/SELLER/Default/2023/1/ZN/KZ/GM/31056044/raw-fresh-almonds.jpg",
       ],
       color: "black",
       size: "Normal",
     },
     {
-      id: "2",
-      title: "Aishwariya System On Ear Wireless On Ear Bluetooth Headphones",
+      id: "13",
+      title: "Kiwi",
       offer: "40%",
-      oldPrice: 7955,
-      price: 3495,
-      image: "https://m.media-amazon.com/images/I/41t7Wa+kxPL._AC_SY400_.jpg",
-      carouselImages: ["https://m.media-amazon.com/images/I/41t7Wa+kxPL.jpg"],
+      oldPrice: 160,
+      price: 140.65,
+      image: "https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg",
+      carouselImages: ["https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg"],
       color: "black",
       size: "Normal",
     },
     {
-      id: "3",
+      id: "14",
       title:
-        "Fastrack Limitless FS1 Pro Smart Watch|1.96 Super AMOLED Arched Display with 410x502 Pixel Resolution|SingleSync BT Calling|NitroFast Charging|110+ Sports Modes|200+ Watchfaces|Upto 7 Days Battery",
+        "Arhar Daal",
       offer: "40%",
-      oldPrice: 24999,
-      price: 19999,
-      image: "https://m.media-amazon.com/images/I/71k3gOik46L._AC_SY400_.jpg",
+      oldPrice: 180,
+      price: 110,
+      image: "https://m.media-amazon.com/images/I/61Ci++pSECL.jpg",
       carouselImages: [
-        "https://m.media-amazon.com/images/I/41bLD50sZSL._SX300_SY300_QL70_FMwebp_.jpg",
-        "https://m.media-amazon.com/images/I/616pTr2KJEL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71wSGO0CwQL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/61Ci++pSECL.jpg",
+        "https://m.media-amazon.com/images/I/81jiJ7DTGGL._AC_UF1000,1000_QL80_.jpg",
+        "https://www.ritirivaaj.com/cdn/shop/products/Unpolished-Toor-Arhar-Dal-Riti-Rivaaj-Grocery.jpg?v=1624796314",
       ],
       color: "Norway Blue",
       size: "8GB RAM, 128GB Storage",
@@ -200,20 +197,22 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
-  const [category, setCategory] = useState("jewelery");
+  const [category, setCategory] = useState("fruits");
   const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
   console.log(selectedAddress)
   const [items, setItems] = useState([
-    { label: "Men's clothing", value: "men's clothing" },
-    { label: "jewelery", value: "jewelery" },
-    { label: "electronics", value: "electronics" },
-    { label: "women's clothing", value: "women's clothing" },
+    { label: "Fruits", value: "fruits" },
+    { label: "Breakfast", value: "breakfast" },
+    { label: "Dry Fruits", value: "dry-fruits" },
+    { label: "Vegetables", value: "vegetables" },
   ]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://fakestoreapi.com/products");
+        const response = await axios.get("http://10.0.2.2:8000/products");
         setProducts(response.data);
       } catch (error) {
         console.log("error message", error);
@@ -236,7 +235,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/addresses/${userId}`
+        `http://10.0.2.2:8000/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -256,6 +255,26 @@ const HomeScreen = () => {
     fetchUser();
   }, []);
   console.log("address", addresses);
+  const onCategoryChange = (selectedCategory) => {
+    setCategory(selectedCategory);
+  };
+  const getCurrentLocation = async () => {
+    try {
+      const { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      const userLocation = await Location.getCurrentPositionAsync({});
+      setLocation(userLocation);
+    } catch (error) {
+      console.error('Error while fetching location:', error);
+      setErrorMsg('Error while fetching location');
+    }
+  };
+
   return (
     <>
       <SafeAreaView
@@ -424,8 +443,8 @@ const HomeScreen = () => {
                     title: item.title,
                     price: item?.price,
                     carouselImages: item.carouselImages,
-                    color: item?.color,
-                    size: item?.size,
+                    about: item?.about,
+                    benefits: item?.benefits,
                     oldPrice: item?.oldPrice,
                     item: item,
                   })
@@ -494,7 +513,8 @@ const HomeScreen = () => {
               value={category} //genderValue
               items={items}
               setOpen={setOpen}
-              setValue={setCategory}
+
+              setValue={onCategoryChange}
               setItems={setItems}
               placeholder="choose category"
               placeholderStyle={styles.placeholderStyles}
@@ -503,6 +523,7 @@ const HomeScreen = () => {
               zIndex={3000}
               zIndexInverse={1000}
             />
+
           </View>
 
           <View
@@ -591,7 +612,7 @@ const HomeScreen = () => {
                   numberOfLines={1}
                   style={{ width: 130, fontSize: 13, textAlign: "center" }}
                 >
-                  India, Bangalore
+                  India, Uttar Pradesh
                 </Text>
               </Pressable>
             ))}
@@ -638,19 +659,13 @@ const HomeScreen = () => {
               style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
             >
               <Ionicons name="locate-sharp" size={22} color="#0066b2" />
-              <Text style={{ color: "#0066b2", fontWeight: "400" }}>
-                Use My Currect location
-              </Text>
-            </View>
+              <Pressable onPress={getCurrentLocation}>
 
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
-            >
-              <AntDesign name="earth" size={22} color="#0066b2" />
 
-              <Text style={{ color: "#0066b2", fontWeight: "400" }}>
-                Deliver outside India
-              </Text>
+                <Text style={{ color: "#0066b2", fontWeight: "400" }}>
+                  Use My Currect location
+                </Text>
+              </Pressable>
             </View>
           </View>
         </ModalContent>

@@ -16,6 +16,11 @@ import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import OrderScreen from "../screens/OrderScreen";
+import NewProduct from "../screens/NewProduct";
+import UpdateProductScreen from "../screens/UpdateProductScreen";
+import DeleteProductScreen from "../screens/DeleteProductScreen";
+import PhoneSignIn from "../screens/PhoneSignIn";
+import GetOrderDetails from "../screens/GetOrderDetails";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -114,6 +119,34 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Order"
           component={OrderScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="NewProduct"
+          component={NewProduct}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Update"
+          component={UpdateProductScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Delete"
+          component={DeleteProductScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Phone"
+          component={PhoneSignIn}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Detail"
+          component={GetOrderDetails}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -32,10 +32,15 @@ const ProductItem = ({ item }) => {
           justifyContent: "space-between",
         }}
       >
+
+
+        <View style={""}>
+          <Text style={{ fontSize: 15, fontWeight: "bold" }}>{item?.name}</Text>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>₹{item?.price}</Text>
-        <Text style={{ color: "#FFC72C", fontWeight: "bold" }}>
-          {item?.rating?.rate} ratings
-        </Text>
+          <Text style={""}></Text>
+          <Text style={""}>{item?.quantity}</Text>
+        </View>
+
       </View>
 
       <Pressable

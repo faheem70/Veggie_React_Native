@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "829611946715",
+    "project_id": "restura-ea05e",
+    "storage_bucket": "restura-ea05e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829611946715:android:0fb505e97b4414801a12fe",
+        "android_client_info": {
+          "package_name": "com.ecommerceproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829611946715-j0s3l8qj34lddu0t3rbcd4ch6v8peg8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxMz_HC2CrHFsq3eprIN2o0JSxJA29lKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829611946715-j0s3l8qj34lddu0t3rbcd4ch6v8peg8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829611946715:android:794d1c1cf13fbae61a12fe",
+        "android_client_info": {
+          "package_name": "com.veg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829611946715-j0s3l8qj34lddu0t3rbcd4ch6v8peg8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxMz_HC2CrHFsq3eprIN2o0JSxJA29lKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829611946715-j0s3l8qj34lddu0t3rbcd4ch6v8peg8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

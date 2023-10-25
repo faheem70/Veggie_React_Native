@@ -21,6 +21,9 @@ const ProductInfoScreen = () => {
   const { width } = Dimensions.get("window");
   const navigation = useNavigation();
   const [addedToCart, setAddedToCart] = useState(false);
+  const [userAddresses, setUserAddresses] = useState([]);
+  const { userId, setUserId } = useContext(UserType);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const height = (width * 100) / 100;
   const dispatch = useDispatch();
   const addItemToCart = (item) => {
@@ -32,6 +35,24 @@ const ProductInfoScreen = () => {
   };
   const cart = useSelector((state) => state.cart.cart);
   console.log(cart);
+  useEffect(() => {
+    // Fetch user addresses here from your API
+    const fetchUserAddresses = async () => {
+      try {
+        const response = await fetch(`http://10.0.2.2:8000/addresses/${userId}`); // Replace with your API URL
+        const data = await response.json();
+        setUserAddresses(data.addresses); // Assuming data.addresses contains an array of user addresses
+      } catch (error) {
+        console.error('Error fetching user addresses:', error);
+      }
+    };
+
+    fetchUserAddresses();
+  }, []);
+  const handleAddressSelection = (address) => {
+    setSelectedAddress(address);
+    // Additional logic for handling address selection, e.g., UI changes
+  };
   return (
     <ScrollView
       style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}
@@ -159,16 +180,16 @@ const ProductInfoScreen = () => {
       <Text style={{ height: 1, borderColor: "#D0D0D0", borderWidth: 1 }} />
 
       <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
-        <Text>Color: </Text>
+        <Text>About: </Text>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-          {route?.params?.color}
+          {route?.params?.about}
         </Text>
       </View>
 
       <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
-        <Text>Size: </Text>
+        <Text>Benefits: </Text>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-          {route?.params?.size}
+          {route?.params?.benefits}
         </Text>
       </View>
 
@@ -192,9 +213,24 @@ const ProductInfoScreen = () => {
         >
           <Ionicons name="location" size={24} color="black" />
 
-          <Text style={{ fontSize: 15, fontWeight: "500" }}>
-            Deliver To Sujan - Bangalore 560019
-          </Text>
+          <Text>Select Delivery Address:</Text>
+          {userAddresses.map((address) => (
+            <Pressable
+              key={address.id}
+              onPress={() => handleAddressSelection(address)}
+              style={{
+                backgroundColor: selectedAddress === address ? '#FFC72C' : 'white',
+                padding: 10,
+                borderRadius: 20,
+                margin: 5,
+              }}
+            >
+              <Text>{address.name}</Text>
+              <Text>{address.street}</Text>
+              <Text>{address.landmark}</Text>
+              <Text>{address.city}</Text>
+            </Pressable>
+          ))}
         </View>
       </View>
 
@@ -223,19 +259,7 @@ const ProductInfoScreen = () => {
         )}
       </Pressable>
 
-      <Pressable
-        style={{
-          backgroundColor: "#FFAC1C",
-          padding: 10,
-          borderRadius: 20,
-          justifyContent: "center",
-          alignItems: "center",
-          marginHorizontal: 10,
-          marginVertical: 10,
-        }}
-      >
-        <Text>Buy Now</Text>
-      </Pressable>
+
     </ScrollView>
   );
 };

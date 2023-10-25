@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-
+const Product = require("./models/product");
 const app = express();
 const port = 8000;
 const cors = require("cors");
@@ -38,8 +38,8 @@ const sendVerificationEmail = async (email, verificationToken) => {
     // Configure the email service or SMTP details here
     service: "gmail",
     auth: {
-      user: "sujananand0@gmail.com",
-      pass: "wkkjjprzkqxtboju",
+      user: "faheemakhtar19730@gmail.com",
+      pass: "rlavjxknhezrpmbo",
     },
   });
 
@@ -75,7 +75,7 @@ app.post("/register", async (req, res) => {
 
     // Create a new user
     const newUser = new User({ name, email, password });
-
+    console.log(newUser);
     // Generate and store the verification token
     newUser.verificationToken = crypto.randomBytes(20).toString("hex");
 
@@ -231,6 +231,18 @@ app.post("/orders", async (req, res) => {
     res.status(500).json({ message: "Error creating orders" });
   }
 });
+// get order details
+app.get("/orders/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const orders = await Order.find({ user: userId });
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders", error);
+    res.status(500).json({ message: "Error fetching orders" });
+  }
+});
 
 //get the user profile
 app.get("/profile/:userId", async (req, res) => {
@@ -264,3 +276,83 @@ app.get("/orders/:userId", async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 })
+app.get("/products", async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while fetching products" });
+  }
+});
+
+app.post("/products", async (req, res) => {
+  const { name, category, image, price, quantity } = req.body;
+
+  if (!name || !category || !image || !price || !quantity) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const newProduct = new Product({
+      name,
+      category,
+      image,
+      price,
+      quantity,
+    });
+
+    await newProduct.save();
+    res.json(newProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while creating a new product" });
+  }
+});
+app.put("/products/:id", async (req, res) => {
+  const productId = req.params.id;
+  const { name, category, image, price, quantity } = req.body;
+
+  if (!name || !category || !image || !price || !quantity) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        name,
+        category,
+        image,
+        price,
+        quantity,
+      },
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json(updatedProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while updating the product" });
+  }
+});
+app.delete("/products/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const deletedProduct = await Product.findByIdAndRemove(productId);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while deleting the product" });
+  }
+});

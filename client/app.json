@@ -26,6 +26,11 @@
     },
     "ios": {
       "bundleIdentifier": "com.host.exponent"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "67a16282-ff2e-4f8e-b0d6-12f189151873"
+      }
     }
   }
 }

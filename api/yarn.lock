@@ -801,6 +801,11 @@
   dependencies:
     "has-flag" "^3.0.0"
 
+"textflow.js@^0.1.4":
+  "integrity" "sha512-0gVI2Didjpm6Hzbt+7gm9QvTexlXuiXb95BAaFDct57eQoNj1iKZWJr0Pe3P0t5/lB89QjrRVHRNP5ChgMK71A=="
+  "resolved" "https://registry.npmjs.org/textflow.js/-/textflow.js-0.1.4.tgz"
+  "version" "0.1.4"
+
 "to-regex-range@^5.0.1":
   "integrity" "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="
   "resolved" "https://registry.npmjs.org/to-regex-range/-/to-regex-range-5.0.1.tgz"
