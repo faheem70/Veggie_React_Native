@@ -105,11 +105,13 @@ const ProfileScreen = () => {
   };
 
   const handleNavigateToUpdateProduct = () => {
-    if (user.email === "faheemakhtar19730@gmail.com") {
-
-      navigation.navigate("Update");
+    if (user?.email === "faheemakhtar19730@gmail.com") {
+      try {
+        navigation.navigate("UpdateScreen");
+      } catch (error) {
+        console.error("Navigation error:", error);
+      }
     }
-
   }
   const handleNavigateToDeleteProduct = () => {
     if (user.email === "faheemakhtar19730@gmail.com") {
@@ -181,6 +183,7 @@ const ProfileScreen = () => {
           </Pressable>
 
         )}
+
         {user?.email === "faheemakhtar19730@gmail.com" && (
           <Pressable
             style={{
@@ -189,14 +192,12 @@ const ProfileScreen = () => {
               borderRadius: 25,
               flex: 1,
             }}
-            onPress={handleNavigateToUpdateProduct}
+            onPress={handleNavigateToDeleteProduct}
           >
-            <Text style={{ textAlign: "center" }}>UpdateProduct</Text>
+            <Text style={{ textAlign: "center" }}>DeleteProduct</Text>
           </Pressable>
 
         )}
-
-
 
       </View>
 
@@ -216,12 +217,14 @@ const ProfileScreen = () => {
               borderRadius: 25,
               flex: 1,
             }}
-            onPress={handleNavigateToDeleteProduct}
+            onPress={handleNavigateToUpdateProduct}
           >
-            <Text style={{ textAlign: "center" }}>DeleteProduct</Text>
+            <Text style={{ textAlign: "center" }}>UpdateProduct</Text>
           </Pressable>
 
         )}
+
+
         {user?.email === "faheemakhtar19730@gmail.com" && (
           <Pressable
             style={{

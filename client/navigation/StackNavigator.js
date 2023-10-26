@@ -34,11 +34,11 @@ const StackNavigator = () => {
           component={HomeScreen}
           options={{
             tabBarLabel: "Home",
-            tabBarLabelStyle: { color: "#00975b" },
+            tabBarLabelStyle: { color: "#00975B" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="##00975b" />
+                <Entypo name="home" size={24} color="#00975B" />
               ) : (
                 <AntDesign name="home" size={24} color="black" />
               ),
@@ -50,10 +50,10 @@ const StackNavigator = () => {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
-            tabBarLabelStyle: { color: "##00975b" },
+            tabBarLabelStyle: { color: "#00975B" },
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Ionicons name="person" size={24} color="#00975b" />
+                <Ionicons name="person" size={24} color="#00975B" />
               ) : (
                 <Ionicons name="person-outline" size={24} color="black" />
               ),
@@ -65,11 +65,11 @@ const StackNavigator = () => {
           component={CartScreen}
           options={{
             tabBarLabel: "Cart",
-            tabBarLabelStyle: { color: "#00975b" },
+            tabBarLabelStyle: { color: "#00975B" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <AntDesign name="shoppingcart" size={24} color="#00975b" />
+                <AntDesign name="shoppingcart" size={24} color="#00975B" />
               ) : (
                 <AntDesign name="shoppingcart" size={24} color="black" />
               ),
@@ -130,7 +130,7 @@ const StackNavigator = () => {
         />
 
         <Stack.Screen
-          name="Update"
+          name="UpdateScreen"
           component={UpdateProductScreen}
           options={{ headerShown: false }}
         />
@@ -152,7 +152,7 @@ const StackNavigator = () => {
         />
 
         <Stack.Screen
-          name="ProductsByCategory"
+          name="ProductByCategory"
           component={ProductsByCategoryScreen}
           options={{ headerShown: false }}
         />

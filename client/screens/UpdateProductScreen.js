@@ -1,7 +1,7 @@
 // ProductUpdateScreen.js
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
 const UpdateProductScreen = ({ route, navigation }) => {
@@ -13,20 +13,22 @@ const UpdateProductScreen = ({ route, navigation }) => {
     const [quantity, setQuantity] = useState('');
 
     const updateProduct = () => {
-        axios.put(`https://arf-veg.onrender.com/products/${productId}`, {
-            name,
-            category,
-            image,
-            price,
-            quantity,
-        })
+        axios
+            .put(`https://arf-veg.onrender.com/products/${productId}`, {
+                name,
+                category,
+                image,
+                price,
+                quantity,
+            })
             .then((response) => {
                 // Handle success (e.g., show a success message, navigate back to the product list screen)
-                console.log(response);
+                Alert.alert('Product updated successfully:');
+                // You can add navigation logic here to navigate back or show a success message.
             })
             .catch((error) => {
                 // Handle error (e.g., show an error message)
-                console.error(error);
+                Alert.alert('Error updating product:');
             });
     };
 

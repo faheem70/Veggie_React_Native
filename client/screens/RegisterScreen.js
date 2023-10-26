@@ -42,6 +42,7 @@ const RegisterScreen = () => {
       .then((response) => {
         console.log(response);
         Alert.alert('Registration successful', 'You have been registered successfully');
+        navigation.navigate("Login")
         setName('');
         setEmail('');
         setPassword('');
@@ -49,7 +50,7 @@ const RegisterScreen = () => {
       .catch((error) => {
         if (error.response) {
           // The request was made, but the server responded with a status code other than 2xx.
-          console.error('Server responded with error status:', error.response.status, error.response.data);
+          Alert.alert('Server responded with error status:');
         } else if (error.request) {
           // The request was made, but no response was received.
           console.error('No response received. Network issue.');

@@ -8,7 +8,7 @@ import {
   ImageBackground,
   Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React ,{useState} from "react";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -21,9 +21,6 @@ const ProductInfoScreen = () => {
   const { width } = Dimensions.get("window");
   const navigation = useNavigation();
   const [addedToCart, setAddedToCart] = useState(false);
-  const [userAddresses, setUserAddresses] = useState([]);
-  const { userId, setUserId } = useContext(UserType);
-  const [selectedAddress, setSelectedAddress] = useState(null);
   const height = (width * 100) / 100;
   const dispatch = useDispatch();
   const addItemToCart = (item) => {
@@ -35,24 +32,6 @@ const ProductInfoScreen = () => {
   };
   const cart = useSelector((state) => state.cart.cart);
   console.log(cart);
-  useEffect(() => {
-    // Fetch user addresses here from your API
-    const fetchUserAddresses = async () => {
-      try {
-        const response = await fetch(`https://arf-veg.onrender.com/addresses/${userId}`); // Replace with your API URL
-        const data = await response.json();
-        setUserAddresses(data.addresses); // Assuming data.addresses contains an array of user addresses
-      } catch (error) {
-        console.error('Error fetching user addresses:', error);
-      }
-    };
-
-    fetchUserAddresses();
-  }, []);
-  const handleAddressSelection = (address) => {
-    setSelectedAddress(address);
-    // Additional logic for handling address selection, e.g., UI changes
-  };
   return (
     <ScrollView
       style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}
@@ -84,7 +63,7 @@ const ProductInfoScreen = () => {
             size={22}
             color="black"
           />
-          <TextInput placeholder="Search ARF.in" />
+          <TextInput placeholder="Search Amazon.in" />
         </Pressable>
 
         <Feather name="mic" size={24} color="black" />
@@ -180,16 +159,16 @@ const ProductInfoScreen = () => {
       <Text style={{ height: 1, borderColor: "#D0D0D0", borderWidth: 1 }} />
 
       <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
-        <Text>About: </Text>
+        <Text>Color: </Text>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-          {route?.params?.about}
+          {route?.params?.color}
         </Text>
       </View>
 
       <View style={{ flexDirection: "row", alignItems: "center", padding: 10 }}>
-        <Text>Benefits: </Text>
+        <Text>Size: </Text>
         <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-          {route?.params?.benefits}
+          {route?.params?.size}
         </Text>
       </View>
 
@@ -213,24 +192,9 @@ const ProductInfoScreen = () => {
         >
           <Ionicons name="location" size={24} color="black" />
 
-          <Text>Select Delivery Address:</Text>
-          {userAddresses.map((address) => (
-            <Pressable
-              key={address.id}
-              onPress={() => handleAddressSelection(address)}
-              style={{
-                backgroundColor: selectedAddress === address ? '#FFC72C' : 'white',
-                padding: 10,
-                borderRadius: 20,
-                margin: 5,
-              }}
-            >
-              <Text>{address.name}</Text>
-              <Text>{address.street}</Text>
-              <Text>{address.landmark}</Text>
-              <Text>{address.city}</Text>
-            </Pressable>
-          ))}
+          <Text style={{ fontSize: 15, fontWeight: "500" }}>
+            Deliver TO Phoolpur
+          </Text>
         </View>
       </View>
 
@@ -259,7 +223,19 @@ const ProductInfoScreen = () => {
         )}
       </Pressable>
 
-
+      <Pressable
+        style={{
+          backgroundColor: "#FFAC1C",
+          padding: 10,
+          borderRadius: 20,
+          justifyContent: "center",
+          alignItems: "center",
+          marginHorizontal: 10,
+          marginVertical: 10,
+        }}
+      >
+        <Text>Buy Now</Text>
+      </Pressable>
     </ScrollView>
   );
 };

@@ -25,7 +25,7 @@ import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserType } from "../UserContext";
 import jwt_decode from "jwt-decode";
-import { Location, Permisson } from "expo";
+
 
 const HomeScreen = () => {
   const list = [
@@ -63,7 +63,7 @@ const HomeScreen = () => {
   const images = [
     "https://delmonte-sitefinity-public.s3.amazonaws.com/images/default-source/hompage-carousel-backgrounds/honeyglow_sweetest-side-of-life_banner_1300-x-50043818711ae484dc2a2764ddd48534898.jpg?sfvrsn=bc84c443_2",
     "https://ghoshak-website-builder.s3.amazonaws.com/78b31aa1-b72f-437a-ad0e-778bf352cb4c.jpeg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvSLKZL9XDCFnp5woV81lSKFywclo5gRwBZI-eTQlD-l9Hs--1EFhOeTZShmDDfc3alM&usqp=CAU",
+    "https://ahallya.in/wp-content/uploads/2020/11/pengpos-fresh-produces-website-banner-940x400-1.png",
   ];
   const deals = [
     {
@@ -128,6 +128,8 @@ const HomeScreen = () => {
         "https://i.ytimg.com/vi/y_vzst8GFhk/maxresdefault.jpg",
 
       ],
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
   ];
   const offers = [
@@ -146,6 +148,8 @@ const HomeScreen = () => {
         "https://www.bigbasket.com/media/uploads/p/l/40006613-3_2-safal-frozen-green-peas.jpg?tr=w-640,q=80",
 
       ],
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
 
     },
     {
@@ -161,7 +165,8 @@ const HomeScreen = () => {
         "https://nuttyyogi.com/cdn/shop/products/Almonds.jpg?v=1606373738",
         "https://5.imimg.com/data5/SELLER/Default/2023/1/ZN/KZ/GM/31056044/raw-fresh-almonds.jpg",
       ],
-
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
     {
       id: "2",
@@ -171,7 +176,8 @@ const HomeScreen = () => {
       price: 140.65,
       image: "https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg",
       carouselImages: ["https://www.shutterstock.com/image-photo/plastic-packaging-kiwi-on-white-260nw-122537464.jpg"],
-
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
     {
       id: "3",
@@ -186,7 +192,8 @@ const HomeScreen = () => {
         "https://m.media-amazon.com/images/I/81jiJ7DTGGL._AC_UF1000,1000_QL80_.jpg",
         "https://www.ritirivaaj.com/cdn/shop/products/Unpolished-Toor-Arhar-Dal-Riti-Rivaaj-Grocery.jpg?v=1624796314",
       ],
-
+      about: "The Skin of the apple is smooth and flavorless.",
+      benefits: "Apples are rich in dietry fibres. vitamins, minerals, and folates",
     },
   ];
   const [products, setProducts] = useState([]);
@@ -196,8 +203,7 @@ const HomeScreen = () => {
   const [category, setCategory] = useState("fruits");
   const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
-  // const [location, setLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
+
   console.log(selectedAddress)
   const [items, setItems] = useState([
     { label: "Fruits", value: "fruits" },
@@ -256,7 +262,7 @@ const HomeScreen = () => {
   };
 
   const navigateToCategory = (categoryName) => {
-    navigation.navigate("ProductsByCategory", { categoryName });
+    navigation.navigate("ProductByCategory", { categoryName });
   };
   return (
     <>
@@ -307,7 +313,7 @@ const HomeScreen = () => {
               alignItems: "center",
               gap: 5,
               padding: 10,
-              backgroundColor: "#AFEEEE",
+              backgroundColor: "#AFEEB7",
             }}
           >
             <Ionicons name="location-outline" size={24} color="black" />
