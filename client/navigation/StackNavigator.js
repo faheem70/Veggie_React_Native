@@ -22,6 +22,7 @@ import DeleteProductScreen from "../screens/DeleteProductScreen";
 import PhoneSignIn from "../screens/PhoneSignIn";
 import GetOrderDetails from "../screens/GetOrderDetails";
 import ProductsByCategoryScreen from "../screens/ProductByCategoryScreen";
+import EditAddressScreen from "../screens/EditAdressScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -106,9 +107,10 @@ const StackNavigator = () => {
           component={AddAddressScreen}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
-          name="Add"
-          component={AddressScreen}
+          name="Edit"
+          component={EditAddressScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -63,7 +63,7 @@ const LoginScreen = () => {
   }
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop: 20 }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center", }}
     >
       <View>
         <Image
@@ -176,7 +176,7 @@ const LoginScreen = () => {
           onPress={handleLogin}
           style={{
             width: 200,
-            backgroundColor: "#FEBE10",
+            backgroundColor: "#4CFE10",
             borderRadius: 6,
             marginLeft: "auto",
             marginRight: "auto",
@@ -199,7 +199,7 @@ const LoginScreen = () => {
           style={{
             marginTop: 10, // Add some margin to separate the buttons
             width: 200,
-            backgroundColor: "#FEBE10",
+            backgroundColor: "#4CFE10",
             borderRadius: 6,
             marginLeft: "auto",
             marginRight: "auto",

@@ -39,7 +39,7 @@ const ProductInfoScreen = () => {
     >
       <View
         style={{
-          backgroundColor: "#00CED1",
+          backgroundColor: "#00D11F",
           padding: 10,
           flexDirection: "row",
           alignItems: "center",

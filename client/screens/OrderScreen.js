@@ -1,58 +1,40 @@
-import { StyleSheet, Text, View,SafeAreaView } from "react-native";
-import React ,{useEffect} from "react";
-import LottieView from "lottie-react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-const OrderScreen = () => {
-    const navigation = useNavigation()
-    useEffect(() => {
-        setTimeout(() => {
-          navigation.replace("Main");
-        }, 1300);
-      }, []);
+const OrderScreen = ({ route }) => {
+  // Assuming you pass order details via route.params
+  const { orderDetails } = route.params;
+
   return (
-    <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-      <LottieView
-        source={require("../assets/thumbs.json")}
-        // ref={animation}
-        style={{
-          height: 260,
-          width: 300,
-          alignSelf: "center",
-          marginTop: 40,
-          justifyContent: "center",
-        }}
-        autoPlay
-        loop={false}
-        speed={0.7}
-      />
-      <Text
-        style={{
-          marginTop: 20,
-          fontSize: 19,
-          fontWeight: "600",
-          textAlign: "center",
-        }}
-      >
-        Your Order Has been Recieved
-      </Text>
-      <LottieView
-        source={require("../assets/sparkle.json")}
-        style={{
-          height: 300,
-          position: "absolute",
-          top: 100,
-          width: 300,
-          alignSelf: "center",
-        }}
-        autoPlay
-        loop={false}
-        speed={0.7}
-      />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Order Details</Text>
+      <View style={styles.orderDetails}>
+        <Text>Order ID: {orderDetails.orderId}</Text>
+        <Text>Total Price: ${orderDetails.totalPrice}</Text>
+        <Text>Shipping Address: {orderDetails.shippingAddress}</Text>
+        <Text>Payment Method: {orderDetails.paymentMethod}</Text>
+        {/* Add more order details as needed */}
+      </View>
+    </View>
   );
 };
 
-export default OrderScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  orderDetails: {
+    backgroundColor: '#f0f0f0',
+    padding: 16,
+    borderRadius: 8,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default OrderScreen;

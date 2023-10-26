@@ -53,21 +53,32 @@ const ConfirmationScreen = () => {
         paymentMethod: selectedOption,
       };
 
+      // Send a POST request to create an order
       const response = await axios.post(
         "https://arf-veg.onrender.com/orders",
         orderData
       );
+
       if (response.status === 200) {
-        navigation.navigate("Order");
+        // Handle successful order creation
+        // You may want to do something after the order is created
+        console.log("Order created successfully", response.data);
+
+        // Clear the cart
         dispatch(cleanCart());
-        console.log("order created successfully", response.data);
+
+        // Navigate to the "Order" screen or any other screen you want
+        navigation.navigate("Order");
       } else {
-        console.log("error creating order", response.data);
+        // Handle the case where order creation failed
+        console.log("Error creating order", response.data);
       }
     } catch (error) {
-      console.log("errror", error);
+      // Handle any errors that occur during the process
+      console.log("Error", error);
     }
   };
+
   const pay = async () => {
     try {
       const options = {
@@ -84,32 +95,61 @@ const ConfirmationScreen = () => {
         theme: { color: "#F37254" },
       };
 
+      // Open the Razorpay payment screen and await the result
       const data = await RazorpayCheckout.open(options);
 
-      console.log(data)
+      console.log(data);
 
+      // After payment is successful, create an order
       const orderData = {
         userId: userId,
         cartItems: cart,
         totalPrice: total,
         shippingAddress: selectedAddress,
-        paymentMethod: "card",
+        paymentMethod: "card", // You might want to change this based on payment method
       };
 
+      // Send a POST request to create an order
       const response = await axios.post(
         "https://arf-veg.onrender.com/orders",
         orderData
       );
+
       if (response.status === 200) {
-        navigation.navigate("Order");
+        // Handle successful order creation
+        // You may want to do something after the order is created
+        console.log("Order created successfully", response.data);
+
+        // Clear the cart
         dispatch(cleanCart());
-        console.log("order created successfully", response.data);
+
+        // Navigate to the "Order" screen or any other screen you want
+        navigation.navigate('Order', {
+          orderDetails: {
+            orderId: response.data.orderId,
+            totalPrice: total,
+            shippingAddress: selectedAddress,
+            paymentMethod: selectedOption, // Update based on the payment method
+            // Add more order details as needed
+          },
+        });
+
       } else {
-        console.log("error creating order", response.data);
+        // Handle the case where order creation failed
+        console.log("Error creating order", response.data);
       }
     } catch (error) {
-      console.log("error", error);
+      // Handle any errors that occur during the process
+      console.log("Error", error);
     }
+  };
+
+  const handleEditAddress = () => {
+
+    navigation.navigate('Edit');
+  };
+  const handleAddNewAddress = () => {
+    navigation.navigate('Add');
   };
   return (
     <ScrollView style={{ marginTop: 55 }}>
@@ -172,7 +212,21 @@ const ConfirmationScreen = () => {
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             Select Delivery Address
           </Text>
-
+          {addresses.length === 0 && (
+            <Pressable
+              onPress={handleAddNewAddress}
+              style={{
+                backgroundColor: '#FFC72C',
+                padding: 10,
+                borderRadius: 20,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 15,
+              }}
+            >
+              <Text>Add New Address</Text>
+            </Pressable>
+          )}
           <Pressable>
             {addresses?.map((item, index) => (
               <Pressable
@@ -222,7 +276,7 @@ const ConfirmationScreen = () => {
                   </Text>
 
                   <Text style={{ fontSize: 15, color: "#181818" }}>
-                    India, Bangalore
+                    India, Uttar Pradesh
                   </Text>
 
                   <Text style={{ fontSize: 15, color: "#181818" }}>
@@ -249,21 +303,9 @@ const ConfirmationScreen = () => {
                         borderWidth: 0.9,
                         borderColor: "#D0D0D0",
                       }}
+                      onPress={handleEditAddress}
                     >
                       <Text>Edit</Text>
-                    </Pressable>
-
-                    <Pressable
-                      style={{
-                        backgroundColor: "#F5F5F5",
-                        paddingHorizontal: 10,
-                        paddingVertical: 6,
-                        borderRadius: 5,
-                        borderWidth: 0.9,
-                        borderColor: "#D0D0D0",
-                      }}
-                    >
-                      <Text>Remove</Text>
                     </Pressable>
 
                     <Pressable

@@ -36,10 +36,10 @@ const CartScreen = () => {
   };
   const navigation = useNavigation();
   return (
-    <ScrollView style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
       <View
         style={{
-          backgroundColor: "#00CED1",
+          backgroundColor: "#00D11F",
           padding: 10,
           flexDirection: "row",
           alignItems: "center",

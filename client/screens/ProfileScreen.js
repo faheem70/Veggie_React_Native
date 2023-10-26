@@ -23,7 +23,7 @@ const ProfileScreen = () => {
     navigation.setOptions({
       headerTitle: "",
       headerStyle: {
-        backgroundColor: "#00CED1",
+        backgroundColor: "#00D11F",
       },
       headerLeft: () => (
         <Image
@@ -104,15 +104,7 @@ const ProfileScreen = () => {
     }
   };
 
-  const handleNavigateToUpdateProduct = () => {
-    if (user?.email === "faheemakhtar19730@gmail.com") {
-      try {
-        navigation.navigate("UpdateScreen");
-      } catch (error) {
-        console.error("Navigation error:", error);
-      }
-    }
-  }
+
   const handleNavigateToDeleteProduct = () => {
     if (user.email === "faheemakhtar19730@gmail.com") {
       // Navigate to the "NewProduct" screen (replace with the actual screen name)
@@ -209,22 +201,6 @@ const ProfileScreen = () => {
           marginTop: 12,
         }}
       >
-        {user?.email === "faheemakhtar19730@gmail.com" && (
-          <Pressable
-            style={{
-              padding: 10,
-              backgroundColor: "#E0E0E0",
-              borderRadius: 25,
-              flex: 1,
-            }}
-            onPress={handleNavigateToUpdateProduct}
-          >
-            <Text style={{ textAlign: "center" }}>UpdateProduct</Text>
-          </Pressable>
-
-        )}
-
-
         {user?.email === "faheemakhtar19730@gmail.com" && (
           <Pressable
             style={{

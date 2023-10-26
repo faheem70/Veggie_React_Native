@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput, View, Text, StyleSheet } from 'react-native';
+import { Button, TextInput } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { useNavigation } from "@react-navigation/native";
+
 function PhoneSignIn() {
+    // If null, no SMS has been sent
     const [confirm, setConfirm] = useState(null);
+
+    // verification code (OTP - One-Time-Passcode)
     const [code, setCode] = useState('');
-    const navigation = useNavigation();
+
+    // Handle login
     function onAuthStateChanged(user) {
         if (user) {
-            // Handle successful login
-            navigation.navigate("Home");
+            // Some Android devices can automatically process the verification code (OTP) message, and the user would NOT need to enter the code.
+            // Actually, if he/she tries to enter it, he/she will get an error message because the code was already used in the background.
+            // In this function, make sure you hide the component(s) for entering the code and/or navigate away from this screen.
+            // It is also recommended to display a message to the user informing him/her that he/she has successfully logged in.
         }
     }
 
@@ -18,6 +24,7 @@ function PhoneSignIn() {
         return subscriber; // unsubscribe on unmount
     }, []);
 
+    // Handle the button press
     async function signInWithPhoneNumber(phoneNumber) {
         const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
         setConfirm(confirmation);
@@ -33,53 +40,19 @@ function PhoneSignIn() {
 
     if (!confirm) {
         return (
-            <View style={styles.container}>
-                <Image
-                    style={{ width: 140, height: 100 }}
-                    source={{
-                        uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
-                    }}
-                />
-                <Button
-                    title="Phone Number Sign In"
-                    onPress={() => signInWithPhoneNumber('+1 650-555-3434')}
-                />
-            </View>
+            <Button
+                title="Phone Number Sign In"
+                onPress={() => signInWithPhoneNumber('+1 650-555-3434')}
+            />
         );
     }
 
     return (
-
-        <View style={styles.container}>
-            <Image
-                style={{ width: 140, height: 100 }}
-                source={{
-                    uri: "https://t3.ftcdn.net/jpg/04/40/13/20/360_F_440132038_9N4HdfG5bpVn1SKWIZVcsrVEQ8eDzvrz.jpg",
-                }}
-            />
-            <TextInput
-                style={styles.input}
-                value={code}
-                onChangeText={(text) => setCode(text)}
-            />
+        <>
+            <TextInput value={code} onChangeText={text => setCode(text)} />
             <Button title="Confirm Code" onPress={() => confirmCode()} />
-        </View>
+        </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    input: {
-        width: '80%',
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        marginBottom: 10,
-    },
-});
 
 export default PhoneSignIn;

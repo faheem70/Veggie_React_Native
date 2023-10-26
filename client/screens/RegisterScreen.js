@@ -63,7 +63,7 @@ const RegisterScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', marginTop: 40 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', }}>
       <View>
         <Image
           style={{ width: 150, height: 100 }}
@@ -205,7 +205,7 @@ const RegisterScreen = () => {
           onPress={handleRegister}
           style={{
             width: 200,
-            backgroundColor: '#FEBE10',
+            backgroundColor: '#4CFE10',
             borderRadius: 6,
             marginLeft: 'auto',
             marginRight: 'auto',

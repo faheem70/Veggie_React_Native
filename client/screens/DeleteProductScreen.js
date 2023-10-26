@@ -29,6 +29,11 @@ const DeleteProductScreen = ({ navigation }) => {
                 console.error(error);
             });
     };
+    const updateProduct = (productId) => {
+        // Navigate to the UpdateProductScreen with the productId
+        navigation.navigate('UpdateProductScreen', { productId });
+    };
+
 
     return (
         <View style={styles.container}>
@@ -42,6 +47,10 @@ const DeleteProductScreen = ({ navigation }) => {
                         <Button
                             title="Delete"
                             onPress={() => deleteProduct(item._id)}
+                        />
+                        <Button
+                            title="Update"
+                            onPress={() => updateProduct(item._id)}
                         />
                     </View>
                 )}
